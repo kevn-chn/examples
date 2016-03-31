@@ -9,11 +9,14 @@ function intent(DOM) {
   const changeWidth$ = DOM.select('.width-slider')
     .events('input')
     .map(ev => ({width: parseInt(ev.target.value)}));
+  const changeHeight$ = DOM.select('.height-slider')
+    .events('input')
+    .map(ev => ({height: parseInt(ev.target.value)}));
   const destroy$ = DOM.select('.remove-btn')
     .events('click')
     .map(ev => true);
 
-  return {changeColor$, changeWidth$, destroy$};
+  return {changeColor$, changeWidth$, changeHeight$, destroy$};
 }
 
 function model(props, actions) {
@@ -23,17 +26,20 @@ function model(props, actions) {
   const width$ = props.width$.take(1)
     .startWith(200)
     .concat(actions.changeWidth$.map(({width}) => width));
+  const height$ = props.height$.take(1)
+    .startWith(200)
+    .concat(actions.changeHeight$.map(({height}) => height));
 
-  return combineLatestObj({color$, width$});
+  return combineLatestObj({color$, width$, height$});
 }
 
 function view(state$) {
-  return state$.map(({color, width}) => {
+  return state$.map(({color, width, height}) => {
     const style = {
-      border: '1px solid #000',
+      // border: '1px solid #000',
       background: 'none repeat scroll 0% 0% ' + color,
       width: width + 'px',
-      height: '70px',
+      height: height + 'px',
       display: 'block',
       padding: '20px',
       margin: '10px 0px'
@@ -50,6 +56,13 @@ function view(state$) {
         })
       ]),
       div('.width-content', String(width)),
+      div('.slider-container', [
+        input('.height-slider', {
+          type: 'range', min: '200', max: '1000',
+          attributes: {value: height}
+        })
+      ]),
+      div('.height-content', String(height)),
       button('.remove-btn', 'Remove')
     ]);
   });

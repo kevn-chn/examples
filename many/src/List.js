@@ -24,7 +24,8 @@ function model(actions, itemFn) {
     }
     hexColor = '#' + hexColor;
     const randomWidth = Math.floor(Math.random() * 800 + 200);
-    return {color: hexColor, width: randomWidth};
+    const randomHeight = Math.floor(Math.random() * 800 + 200);
+    return {color: hexColor, width: randomWidth, height: randomHeight};
   }
 
   let mutableLastId = 0;
@@ -39,7 +40,7 @@ function model(actions, itemFn) {
     return {id, DOM: sinks.DOM, destroy$: sinks.destroy$};
   }
 
-  const initialState = [createNewItem({color: 'red', width: 300})]
+  const initialState = [createNewItem({color: 'red', width: 300, height: 300})]
 
   const addItemMod$ = actions.addItem$.map(amount => {
     let newItems = [];
@@ -83,6 +84,7 @@ function makeItemWrapper(DOM) {
     const propsObservables = {
       color$: Observable.just(props.color),
       width$: Observable.just(props.width),
+      height$: Observable.just(props.height),
     };
     const item = isolate(Item)({DOM, props: propsObservables});
     return {
