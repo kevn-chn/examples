@@ -1,0 +1,14 @@
+html {
+  font-family: 'Futura', sans-serif;
+}
+
+.item {
+  box-shadow: 4px 4px 12px 1px #ccc;
+  border: none;
+  transition: all 0.5s ease;
+}
+
+.color-field {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+}
