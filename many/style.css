@@ -1,11 +1,12 @@
 html {
   font-family: 'Futura', sans-serif;
+  font-size: 1.5em;
 }
 
 .item {
-  box-shadow: 4px 4px 12px 1px #ccc;
+  box-shadow: 4px 6px 12px 1px #bbb;
   border: none;
-  transition: all 0.5s ease;
+  /*transition: all 0.2s ease;*/
 }
 
 .color-field {

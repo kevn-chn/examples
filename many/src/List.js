@@ -6,7 +6,7 @@ import Item from './Item';
 function intent(DOM, itemActions) {
   const addItem$ = Observable.merge(
     DOM.select('.add-one-btn').events('click').map(() => 1),
-    DOM.select('.add-many-btn').events('click').map(() => 1000)
+    DOM.select('.add-many-btn').events('click').map(() => 100)
   );
   const removeItem$ = itemActions.destroy$;
 
@@ -24,7 +24,7 @@ function model(actions, itemFn) {
     }
     hexColor = '#' + hexColor;
     const randomWidth = Math.floor(Math.random() * 800 + 200);
-    const randomHeight = Math.floor(Math.random() * 800 + 200);
+    const randomHeight = Math.floor(Math.random() * 400 + 200);
     return {color: hexColor, width: randomWidth, height: randomHeight};
   }
 
@@ -40,7 +40,7 @@ function model(actions, itemFn) {
     return {id, DOM: sinks.DOM, destroy$: sinks.destroy$};
   }
 
-  const initialState = [createNewItem({color: 'red', width: 300, height: 300})]
+  const initialState = [createNewItem({color: 'red', width: 200, height: 200})]
 
   const addItemMod$ = actions.addItem$.map(amount => {
     let newItems = [];

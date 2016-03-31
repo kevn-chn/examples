@@ -40,9 +40,9 @@ function view(state$) {
       background: 'none repeat scroll 0% 0% ' + color,
       width: width + 'px',
       height: height + 'px',
-      display: 'block',
+      display: 'inline-block',
       padding: '20px',
-      margin: '10px 0px'
+      margin: '10px 10px'
     };
     return div(`.item`, {style}, [
       input('.color-field', {
@@ -58,7 +58,7 @@ function view(state$) {
       div('.width-content', String(width)),
       div('.slider-container', [
         input('.height-slider', {
-          type: 'range', min: '200', max: '1000',
+          type: 'range', min: '200', max: '600',
           attributes: {value: height}
         })
       ]),
